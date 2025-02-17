@@ -9,6 +9,7 @@ import (
 type EnrollmentRepository interface {
 	Create(input *models.Enrollments) (*models.Enrollments, error)
 	Delete(id int) (*models.Enrollments, error)
+	GetAll() ([]*models.Enrollments, error)
 }
 
 type enrollmentRepository struct {
@@ -95,4 +96,56 @@ func (r *enrollmentRepository) Delete(id int) (*models.Enrollments, error) {
 		Courses:        enrollment.Courses,
 		EnrollmentDate: enrollment.EnrollmentDate,
 	}, nil
+}
+
+func (r *enrollmentRepository) GetAll() ([]*models.Enrollments, error) {
+	// Query untuk mengambil semua data enrollment
+	query := `
+		SELECT 
+			e.enrolment_id, e.student_id, e.course_id, e.enrollment_date, 
+			s.student_id, s.first_name, s.last_name, s.email, s.address, s.date_of_birth, s.created_at, s.updated_at,
+			c.course_id, c.name, c.description, c.credits, c.department_id, c.created_at, c.updated_at,
+			d.department_id, d.name, d.description, d.created_at, d.updated_at
+		FROM enrollments e
+		JOIN students s ON e.student_id = s.student_id
+		JOIN courses c ON e.course_id = c.course_id
+		JOIN departments d ON c.department_id = d.department_id
+	`
+
+	rows, err := r.db.Query(query)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var enrollments []*models.Enrollments
+
+	for rows.Next() {
+		var enrollment models.Enrollments
+		var student models.Student
+		var course models.Course
+		var department models.Department
+
+		// Scan the result into the enrollment and related fields
+		err := rows.Scan(
+			&enrollment.EnrolmentId, &enrollment.StudentId, &enrollment.CourseId, &enrollment.EnrollmentDate,
+			&student.StudentId, &student.FirstName, &student.LastName, &student.Email, &student.Address, &student.DateOfBirth, &student.CreatedAt, &student.UpdatedAt,
+			&course.CourseID, &course.Name, &course.Description, &course.Credits, &course.DepartmentId, &course.CreatedAt, &course.UpdatedAt,
+			&department.DepartmentID, &department.Name, &department.Description, &department.CreatedAt, &department.UpdatedAt,
+		)
+		if err != nil {
+			return nil, err
+		}
+
+		// Assign the student, course, and department to the enrollment
+		enrollment.Students = student
+		enrollment.Courses = course
+		enrollment.Courses.Departments = department
+
+		// Append the enrollment to the list
+		enrollments = append(enrollments, &enrollment)
+	}
+
+	// Return the list of enrollments
+	return enrollments, nil
 }

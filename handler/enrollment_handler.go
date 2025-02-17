@@ -73,3 +73,21 @@ func (h *EnrollmentHandler) DeleteEnrollmentHandler(c echo.Context) error {
 	response := helper.APIresponse(http.StatusOK, formatter.FormatEnrollmentDelete(deletedEnrollment))
 	return c.JSON(http.StatusOK, response)
 }
+
+// GetAllEnrollments godoc
+// @Summary Get all enrollment
+// @Description Retrieves a list of all available enrollment
+// @Tags Enrollments
+// @Accept json
+// @Produce json
+// @Success 200 {object} helper.Response
+// @Failure 500 {object} helper.Response
+// @Router /enrollments [get]
+func (h *EnrollmentHandler) GetAllEnrollment(c echo.Context) error {
+	courses, err := h.enrollmentService.GetAllEnrollment()
+	if err != nil {
+		return c.JSON(http.StatusInternalServerError, err.Error())
+	}
+	response := helper.APIresponse(http.StatusOK, formatter.FormatEnrollmentResponse(courses))
+	return c.JSON(http.StatusOK, response)
+}

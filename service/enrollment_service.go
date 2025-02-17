@@ -10,6 +10,7 @@ import (
 type EnrollmentService interface {
 	CreateEnrollment(req models.EnrollmentsParam) (*models.Enrollments, error)
 	DeleteEnrollment(id int) (*models.Enrollments, error)
+	GetAllEnrollment() ([]*models.Enrollments, error)
 }
 
 type serviceEnrollment struct {
@@ -55,4 +56,12 @@ func (s *serviceEnrollment) DeleteEnrollment(id int) (*models.Enrollments, error
 	}
 
 	return deletedEnrollment, nil
+}
+
+func (s *serviceEnrollment) GetAllEnrollment() ([]*models.Enrollments, error) {
+	get, err := s.repositoryEnrollment.GetAll()
+	if err != nil {
+		return nil, err
+	}
+	return get, nil
 }

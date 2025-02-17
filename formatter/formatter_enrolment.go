@@ -38,3 +38,21 @@ func FormatEnrollmentDelete(enrollment *models.Enrollments) EnrollmentDeleteResp
 		UpdatedAt:      time.Time{}, // Default value "0001-01-01T00:00:00Z"
 	}
 }
+
+type EnrollmentResponse struct {
+	StudentId      int       `json:"StudentId"`
+	CourseId       int       `json:"CourseId"`
+	EnrollmentDate time.Time `json:"EnrollmentDate"`
+}
+
+func FormatEnrollmentResponse(enrollments []*models.Enrollments) []EnrollmentResponse {
+	var response []EnrollmentResponse
+	for _, enrollment := range enrollments {
+		response = append(response, EnrollmentResponse{
+			StudentId:      enrollment.StudentId,
+			CourseId:       enrollment.CourseId,
+			EnrollmentDate: enrollment.EnrollmentDate,
+		})
+	}
+	return response
+}

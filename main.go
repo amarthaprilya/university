@@ -18,7 +18,7 @@ import (
 
 // @title Sweager Service API
 // @description Sweager service API in Go using Gin framework
-// @host localhost:8080/
+// @host https://university-51cbe47018ea.herokuapp.com/
 // @securitydefinitions.apikey BearerAuth
 // @in header
 // @name Authorization
@@ -69,6 +69,19 @@ func main() {
 
 	e.POST("/enrollments", enrollmentHandler.CreateEnrollmentHandler)
 	e.DELETE("/enrollments/:id", enrollmentHandler.DeleteEnrollmentHandler)
+	e.GET("/enrollments/", enrollmentHandler.GetAllEnrollment)
+
+	ProfessorRepo := repository.NewProfessorRepository(database)
+	professorService := service.NewProfessorService(ProfessorRepo)
+	professorHandler := handler.NewProfessorHandler(professorService)
+
+	e.GET("/professor/", professorHandler.GetAllProfessor)
+
+	teachingRepo := repository.NewTeachingRepository(database)
+	teachingService := service.NewTeachingService(teachingRepo)
+	teachingHandler := handler.NewTeachingHandler(teachingService)
+
+	e.GET("/teaching/", teachingHandler.GetAllTeaching)
 
 	port := os.Getenv("PORT")
 	if port == "" {
