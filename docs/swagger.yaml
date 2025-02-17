@@ -61,6 +61,25 @@ paths:
       summary: Get all courses
       tags:
       - Courses
+  /department:
+    get:
+      consumes:
+      - application/json
+      description: Retrieves a list of all available department
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.Response'
+      summary: Get all department
+      tags:
+      - Department
   /enrollments:
     get:
       consumes:

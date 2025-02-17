@@ -44,6 +44,35 @@ const docTemplate = `{
                 }
             }
         },
+        "/department": {
+            "get": {
+                "description": "Retrieves a list of all available department",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Department"
+                ],
+                "summary": "Get all department",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/helper.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/helper.Response"
+                        }
+                    }
+                }
+            }
+        },
         "/enrollments": {
             "get": {
                 "description": "Retrieves a list of all available enrollment",

@@ -83,6 +83,12 @@ func main() {
 
 	e.GET("/teaching/", teachingHandler.GetAllTeaching)
 
+	departmentRepo := repository.NewDepartmentRepository(database)
+	departmentService := service.NewDepartmentService(departmentRepo)
+	departmentHandler := handler.NewDepartmentHandler(departmentService)
+
+	e.GET("/department", departmentHandler.GetAllDepartments)
+
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "8080"

@@ -52,6 +52,10 @@ CREATE TABLE IF NOT EXISTS professors (
     updated_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
 );
 
+INSERT INTO professors (first_name, last_name, email, password, address)
+VALUES ('Teacher', 'Terbaik', 'testTeacher@example.com', 'password123', '123 Main St, Springfield, USA');
+
+
 -- Table for enrollments
 CREATE TABLE IF NOT EXISTS enrollments (
     enrolment_id SERIAL PRIMARY KEY,
@@ -74,6 +78,10 @@ CREATE TABLE IF NOT EXISTS teachings (
     FOREIGN KEY (professor_id) REFERENCES professors(professor_id) ON DELETE CASCADE,
     FOREIGN KEY (course_id) REFERENCES courses(course_id) ON DELETE CASCADE
 );
+
+INSERT INTO teachings (professor_id, course_id)
+VALUES (1, 101);  -- Misalnya professor_id adalah 1 dan course_id adalah 101
+
 
 INSERT INTO departments (name, description, created_at, updated_at)
 VALUES 
