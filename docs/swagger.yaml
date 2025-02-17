@@ -1,0 +1,213 @@
+definitions:
+  helper.Response:
+    properties:
+      data: {}
+      status:
+        type: integer
+    type: object
+  models.EnrollmentsParam:
+    properties:
+      course_id:
+        type: integer
+      enrollment_date:
+        type: string
+      student_id:
+        type: integer
+    type: object
+  models.StudentLoginParam:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+    type: object
+  models.StudentParam:
+    properties:
+      address:
+        type: string
+      dateOfBirth:
+        type: string
+      email:
+        type: string
+      firstName:
+        type: string
+      lastName:
+        type: string
+      password:
+        type: string
+    type: object
+host: localhost:8080/
+info:
+  contact: {}
+  description: Sweager service API in Go using Gin framework
+  title: Sweager Service API
+paths:
+  /courses:
+    get:
+      consumes:
+      - application/json
+      description: Retrieves a list of all available courses
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.Response'
+      summary: Get all courses
+      tags:
+      - Courses
+  /enrollments:
+    post:
+      consumes:
+      - application/json
+      description: Enrolls a student in a specific course
+      parameters:
+      - description: Enrollment Data
+        in: body
+        name: enrollment
+        required: true
+        schema:
+          $ref: '#/definitions/models.EnrollmentsParam'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.Response'
+      summary: Enroll a student in a course
+      tags:
+      - Enrollments
+  /enrollments/{id}:
+    delete:
+      description: Removes a student's enrollment from a course
+      parameters:
+      - description: Enrollment ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.Response'
+      summary: Delete a student's enrollment
+      tags:
+      - Enrollments
+  /students/login:
+    post:
+      consumes:
+      - application/json
+      description: Authenticate student and generate token
+      parameters:
+      - description: Student Login Data
+        in: body
+        name: student
+        required: true
+        schema:
+          $ref: '#/definitions/models.StudentLoginParam'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.Response'
+      summary: Login a student
+      tags:
+      - Students
+  /students/me:
+    get:
+      consumes:
+      - application/json
+      description: Retrieve student data based on the authentication token
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helper.Response'
+      security:
+      - BearerAuth: []
+      summary: Get student by token
+      tags:
+      - Students
+  /students/register:
+    post:
+      consumes:
+      - application/json
+      description: Create a new student account
+      parameters:
+      - description: Student Data
+        in: body
+        name: student
+        required: true
+        schema:
+          $ref: '#/definitions/models.StudentParam'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.Response'
+      summary: Register a new student
+      tags:
+      - Students
+securityDefinitions:
+  BearerAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
