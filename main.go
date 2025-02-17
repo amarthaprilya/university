@@ -18,7 +18,7 @@ import (
 
 // @title Sweager Service API
 // @description Sweager service API in Go using Gin framework
-// @host university-51cbe47018ea.herokuapp.com/
+// @host university-51cbe47018ea.herokuapp.com
 // @securitydefinitions.apikey BearerAuth
 // @in header
 // @name Authorization
@@ -57,41 +57,41 @@ func main() {
 	e.Use(middleware.Recover())
 
 	// Route grup untuk user
-	e.POST("students/register/", studentHandler.RegisterStudent)
-	e.POST("students/login/", studentHandler.LoginStudent)
-	e.GET("students/me/", studentHandler.GetStudentByToken, mdw.AuthMiddleware(authService, studentService))
+	e.POST("students/register", studentHandler.RegisterStudent)
+	e.POST("students/login", studentHandler.LoginStudent)
+	e.GET("students/me", studentHandler.GetStudentByToken, mdw.AuthMiddleware(authService, studentService))
 
 	courseRepo := repository.NewCourseRepository(database)
 	courseService := service.NewCourseService(courseRepo)
 	courseHandler := handler.NewCourseHandler(courseService)
 
-	e.GET("/courses/", courseHandler.GetAllCourses)
+	e.GET("/courses", courseHandler.GetAllCourses)
 
 	enrollmentRepo := repository.NewEnrollmentRepository(database)
 	enrollmentService := service.NewEnrollmentService(enrollmentRepo)
 	enrollmentHandler := handler.NewEnrollmentHandler(enrollmentService)
 
-	e.POST("/enrollments/", enrollmentHandler.CreateEnrollmentHandler)
-	e.DELETE("/enrollments/:id/", enrollmentHandler.DeleteEnrollmentHandler)
-	e.GET("/enrollments/", enrollmentHandler.GetAllEnrollment)
+	e.POST("/enrollments", enrollmentHandler.CreateEnrollmentHandler)
+	e.DELETE("/enrollments/:id", enrollmentHandler.DeleteEnrollmentHandler)
+	e.GET("/enrollments", enrollmentHandler.GetAllEnrollment)
 
 	ProfessorRepo := repository.NewProfessorRepository(database)
 	professorService := service.NewProfessorService(ProfessorRepo)
 	professorHandler := handler.NewProfessorHandler(professorService)
 
-	e.GET("/professor/", professorHandler.GetAllProfessor)
+	e.GET("/professor", professorHandler.GetAllProfessor)
 
 	teachingRepo := repository.NewTeachingRepository(database)
 	teachingService := service.NewTeachingService(teachingRepo)
 	teachingHandler := handler.NewTeachingHandler(teachingService)
 
-	e.GET("/teaching/", teachingHandler.GetAllTeaching)
+	e.GET("/teaching", teachingHandler.GetAllTeaching)
 
 	departmentRepo := repository.NewDepartmentRepository(database)
 	departmentService := service.NewDepartmentService(departmentRepo)
 	departmentHandler := handler.NewDepartmentHandler(departmentService)
 
-	e.GET("/department/", departmentHandler.GetAllDepartments)
+	e.GET("/department", departmentHandler.GetAllDepartments)
 
 	port := os.Getenv("PORT")
 	if port == "" {
