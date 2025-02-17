@@ -28,7 +28,11 @@ func main() {
 	e.Use(middleware.CORS())
 	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
 		AllowOrigins: []string{"*"},
-		AllowMethods: []string{echo.GET, echo.POST, echo.PUT, echo.DELETE},
+		AllowHeaders: []string{
+			"Origin", "Accept", "X-Requested-With", "Content-Type",
+			"Access-Control-Request-Method", "Access-Control-Request-Headers", "Authorization",
+		},
+		AllowMethods: []string{"POST", "OPTIONS", "GET", "PUT", "DELETE"},
 	}))
 
 	e.GET("/swagger/*", echoSwagger.WrapHandler)
