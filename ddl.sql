@@ -10,9 +10,6 @@ CREATE TABLE IF NOT EXISTS departments (
     updated_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
 );
 
--- INSERT INTO departments (name, description)
--- VALUES ('Engineering', 'Department focused on technical development and research.');
-
 
 -- Table for courses
 CREATE TABLE IF NOT EXISTS courses (
@@ -39,10 +36,6 @@ CREATE TABLE IF NOT EXISTS students (
     updated_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
 );
 
--- INSERT INTO students (first_name, last_name, email, password, address, date_of_birth)
--- VALUES 
--- ('John', 'Doe', 'cipuy@gmail.com', '$2a$04$9FRlG4umpd1Q/7h7/znfsuoqgkX1TLkG5aFCLthj2dQldZNycF2hu', 'Jl. Jakarta No.1', '2001-05-15');
-
 
 -- Table for professors
 CREATE TABLE IF NOT EXISTS professors (
@@ -55,9 +48,6 @@ CREATE TABLE IF NOT EXISTS professors (
     created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
 );
-
--- INSERT INTO professors (first_name, last_name, email, password, address)
--- VALUES ('amartha', 'aprilia', 'aprilia@example.com', 'password123', 'addresss');
 
 
 -- Table for enrollments
@@ -83,22 +73,20 @@ CREATE TABLE IF NOT EXISTS teachings (
     FOREIGN KEY (course_id) REFERENCES courses(course_id) ON DELETE CASCADE
 );
 
--- INSERT INTO teachings (professor_id, course_id)
--- VALUES (1, 1);  
-
-
--- INSERT INTO departments (name, description, created_at, updated_at)
--- VALUES 
--- ('Computer Science', 'Department for computer science studies', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
--- ('Electrical Engineering', 'Department for electrical engineering studies', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
--- ('Mechanical Engineering', 'Department for mechanical engineering studies', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
-
--- INSERT INTO courses (name, description, credits, department_id, created_at, updated_at)
--- VALUES 
--- ('Introduction to Programming', 'Course that teaches basic programming concepts.', '3', 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
--- ('Data Structures and Algorithms', 'Course that covers data structures and algorithms.', '3', 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
--- ('Circuit Analysis', 'Course covering the fundamentals of electrical circuits.', '3', 2, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
--- ('Thermodynamics', 'Course that introduces the principles of thermodynamics.', '3', 3, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+INSERT INTO departments (name, description)
+VALUES ('Computer Science', 'Department for computer science studies');
+INSERT INTO courses (name, description, credits, department_id)
+VALUES ('Introduction to Programming', 'Basic programming concepts.', '3', 1);
+INSERT INTO students (first_name, last_name, email, password, address, date_of_birth)
+VALUES 
+('Amartha', 'Student', 'amartha.student@example.com', '$2a$04$9FRlG4umpd1Q/7h7/znfsuoqgkX1TLkG5aFCLthj2dQldZNycF2hu', 'Jl. Jakarta No.1', '2001-05-15');
+INSERT INTO professors (first_name, last_name, email, password, address)
+VALUES 
+('Amartha', 'Professor', 'amartha.professor@example.com', '$2a$04$9FRlG4umpd1Q/7h7/znfsuoqgkX1TLkG5aFCLthj2dQldZNycF2hu', 'Jl. Surabaya No.2');
+INSERT INTO enrollments (student_id, course_id, enrollment_date)
+VALUES (1, 1, CURRENT_DATE);
+INSERT INTO teachings (professor_id, course_id)
+VALUES (1, 1);
 
 
 -- -- Trigger function to update `updated_at` column
@@ -140,3 +128,4 @@ CREATE TABLE IF NOT EXISTS teachings (
 -- BEFORE UPDATE ON teachings
 -- FOR EACH ROW
 -- EXECUTE FUNCTION update_timestamp();
+
