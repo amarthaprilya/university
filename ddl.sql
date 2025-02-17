@@ -73,20 +73,20 @@ CREATE TABLE IF NOT EXISTS teachings (
     FOREIGN KEY (course_id) REFERENCES courses(course_id) ON DELETE CASCADE
 );
 
-INSERT INTO departments (name, description)
-VALUES ('Computer Science', 'Department for computer science studies');
-INSERT INTO courses (name, description, credits, department_id)
-VALUES ('Introduction to Programming', 'Basic programming concepts.', '3', 1);
-INSERT INTO students (first_name, last_name, email, password, address, date_of_birth)
-VALUES 
-('Amartha', 'Student', 'amartha.student@example.com', '$2a$04$9FRlG4umpd1Q/7h7/znfsuoqgkX1TLkG5aFCLthj2dQldZNycF2hu', 'Jl. Jakarta No.1', '2001-05-15');
-INSERT INTO professors (first_name, last_name, email, password, address)
-VALUES 
-('Amartha', 'Professor', 'amartha.professor@example.com', '$2a$04$9FRlG4umpd1Q/7h7/znfsuoqgkX1TLkG5aFCLthj2dQldZNycF2hu', 'Jl. Surabaya No.2');
-INSERT INTO enrollments (student_id, course_id, enrollment_date)
-VALUES (1, 1, CURRENT_DATE);
-INSERT INTO teachings (professor_id, course_id)
-VALUES (1, 1);
+-- INSERT INTO departments (name, description)
+-- VALUES ('Computer Science', 'Department for computer science studies');
+-- INSERT INTO courses (name, description, credits, department_id)
+-- VALUES ('Introduction to Programming', 'Basic programming concepts.', '3', 1);
+-- INSERT INTO students (first_name, last_name, email, password, address, date_of_birth)
+-- VALUES 
+-- ('Amartha', 'Student', 'amartha.student@example.com', '$2a$04$9FRlG4umpd1Q/7h7/znfsuoqgkX1TLkG5aFCLthj2dQldZNycF2hu', 'Jl. Jakarta No.1', '2001-05-15');
+-- INSERT INTO professors (first_name, last_name, email, password, address)
+-- VALUES 
+-- ('Amartha', 'Professor', 'amartha.professor@example.com', '$2a$04$9FRlG4umpd1Q/7h7/znfsuoqgkX1TLkG5aFCLthj2dQldZNycF2hu', 'Jl. Surabaya No.2');
+-- INSERT INTO enrollments (student_id, course_id, enrollment_date)
+-- VALUES (1, 1, CURRENT_DATE);
+-- INSERT INTO teachings (professor_id, course_id)
+-- VALUES (1, 1);
 
 
 -- -- Trigger function to update `updated_at` column
