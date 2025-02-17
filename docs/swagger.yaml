@@ -36,10 +36,10 @@ definitions:
       password:
         type: string
     type: object
-host: university-51cbe47018ea.herokuapp.com/
+host: university-51cbe47018ea.herokuapp.com
 info:
   contact: {}
-  description: Sweager service API in Go using Gin framework
+  description: Sweager service API in Go using echo framework
   title: Sweager Service API
 paths:
   /courses:

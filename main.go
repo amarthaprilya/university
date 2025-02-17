@@ -17,7 +17,7 @@ import (
 )
 
 // @title Sweager Service API
-// @description Sweager service API in Go using Gin framework
+// @description Sweager service API in Go using echo framework
 // @host university-51cbe47018ea.herokuapp.com
 // @securitydefinitions.apikey BearerAuth
 // @in header

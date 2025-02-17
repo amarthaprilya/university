@@ -1,11 +1,11 @@
 {
     "swagger": "2.0",
     "info": {
-        "description": "Sweager service API in Go using Gin framework",
+        "description": "Sweager service API in Go using echo framework",
         "title": "Sweager Service API",
         "contact": {}
     },
-    "host": "university-51cbe47018ea.herokuapp.com/",
+    "host": "university-51cbe47018ea.herokuapp.com",
     "paths": {
         "/courses": {
             "get": {
