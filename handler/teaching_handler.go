@@ -2,6 +2,7 @@ package handler
 
 import (
 	"net/http"
+	"student/formatter"
 	"student/helper"
 	"student/service"
 
@@ -30,6 +31,6 @@ func (h *TeachingHandler) GetAllTeaching(c echo.Context) error {
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, err.Error())
 	}
-	response := helper.APIresponse(http.StatusOK, professor)
+	response := helper.APIresponse(http.StatusOK, formatter.FormatTeachings(professor))
 	return c.JSON(http.StatusOK, response)
 }

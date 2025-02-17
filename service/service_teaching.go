@@ -14,7 +14,7 @@ type teachingService struct {
 }
 
 func NewTeachingService(repositoryTeaching repository.TeachingRepository) TeachingService {
-	return &teachingService{}
+	return &teachingService{repositoryTeaching: repositoryTeaching}
 }
 
 func (s *teachingService) GetAllTeaching() ([]*models.Teachings, error) {

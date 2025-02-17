@@ -84,7 +84,7 @@ CREATE TABLE IF NOT EXISTS teachings (
 );
 
 -- INSERT INTO teachings (professor_id, course_id)
--- VALUES (1, 101);  
+-- VALUES (1, 1);  
 
 
 -- INSERT INTO departments (name, description, created_at, updated_at)

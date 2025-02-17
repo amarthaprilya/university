@@ -13,13 +13,11 @@ type EnrollmentDeleteResponse struct {
 }
 
 type CourseResponse struct {
-	CourseID     int       `json:"CourseID"`
-	Name         string    `json:"Name"`
-	Description  string    `json:"Description"`
-	Credits      string    `json:"Credits"`
-	DepartmentId int       `json:"DepartmentId"`
-	CreatedAt    time.Time `json:"CreatedAt"`
-	UpdatedAt    time.Time `json:"UpdatedAt"`
+	CourseID     int    `json:"CourseID"`
+	Name         string `json:"Name"`
+	Description  string `json:"Description"`
+	Credits      string `json:"Credits"`
+	DepartmentId int    `json:"DepartmentId"`
 }
 
 func FormatEnrollmentDelete(enrollment *models.Enrollments) EnrollmentDeleteResponse {
@@ -30,8 +28,6 @@ func FormatEnrollmentDelete(enrollment *models.Enrollments) EnrollmentDeleteResp
 			Description:  enrollment.Courses.Description,
 			Credits:      enrollment.Courses.Credits,
 			DepartmentId: enrollment.Courses.DepartmentId,
-			CreatedAt:    enrollment.Courses.CreatedAt,
-			UpdatedAt:    enrollment.Courses.UpdatedAt,
 		},
 		EnrollmentDate: enrollment.EnrollmentDate,
 		CreatedAt:      time.Time{}, // Default value "0001-01-01T00:00:00Z"
