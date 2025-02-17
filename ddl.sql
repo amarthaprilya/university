@@ -10,6 +10,10 @@ CREATE TABLE IF NOT EXISTS departments (
     updated_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
 );
 
+-- INSERT INTO departments (name, description)
+-- VALUES ('Engineering', 'Department focused on technical development and research.');
+
+
 -- Table for courses
 CREATE TABLE IF NOT EXISTS courses (
     course_id SERIAL PRIMARY KEY,
@@ -52,8 +56,8 @@ CREATE TABLE IF NOT EXISTS professors (
     updated_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO professors (first_name, last_name, email, password, address)
-VALUES ('Teacher', 'Terbaik', 'testTeacher@example.com', 'password123', '123 Main St, Springfield, USA');
+-- INSERT INTO professors (first_name, last_name, email, password, address)
+-- VALUES ('amartha', 'aprilia', 'aprilia@example.com', 'password123', 'addresss');
 
 
 -- Table for enrollments
@@ -79,22 +83,22 @@ CREATE TABLE IF NOT EXISTS teachings (
     FOREIGN KEY (course_id) REFERENCES courses(course_id) ON DELETE CASCADE
 );
 
-INSERT INTO teachings (professor_id, course_id)
-VALUES (1, 101);  -- Misalnya professor_id adalah 1 dan course_id adalah 101
+-- INSERT INTO teachings (professor_id, course_id)
+-- VALUES (1, 101);  
 
 
-INSERT INTO departments (name, description, created_at, updated_at)
-VALUES 
-('Computer Science', 'Department for computer science studies', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('Electrical Engineering', 'Department for electrical engineering studies', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('Mechanical Engineering', 'Department for mechanical engineering studies', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+-- INSERT INTO departments (name, description, created_at, updated_at)
+-- VALUES 
+-- ('Computer Science', 'Department for computer science studies', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+-- ('Electrical Engineering', 'Department for electrical engineering studies', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+-- ('Mechanical Engineering', 'Department for mechanical engineering studies', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
-INSERT INTO courses (name, description, credits, department_id, created_at, updated_at)
-VALUES 
-('Introduction to Programming', 'Course that teaches basic programming concepts.', '3', 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('Data Structures and Algorithms', 'Course that covers data structures and algorithms.', '3', 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('Circuit Analysis', 'Course covering the fundamentals of electrical circuits.', '3', 2, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('Thermodynamics', 'Course that introduces the principles of thermodynamics.', '3', 3, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+-- INSERT INTO courses (name, description, credits, department_id, created_at, updated_at)
+-- VALUES 
+-- ('Introduction to Programming', 'Course that teaches basic programming concepts.', '3', 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+-- ('Data Structures and Algorithms', 'Course that covers data structures and algorithms.', '3', 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+-- ('Circuit Analysis', 'Course covering the fundamentals of electrical circuits.', '3', 2, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+-- ('Thermodynamics', 'Course that introduces the principles of thermodynamics.', '3', 3, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
 
 -- -- Trigger function to update `updated_at` column
