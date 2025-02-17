@@ -452,7 +452,7 @@ const docTemplate = `{
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
 	Version:          "",
-	Host:             "https://university-51cbe47018ea.herokuapp.com/",
+	Host:             "university-51cbe47018ea.herokuapp.com/",
 	BasePath:         "",
 	Schemes:          []string{},
 	Title:            "Sweager Service API",

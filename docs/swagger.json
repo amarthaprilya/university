@@ -5,7 +5,7 @@
         "title": "Sweager Service API",
         "contact": {}
     },
-    "host": "https://university-51cbe47018ea.herokuapp.com/",
+    "host": "university-51cbe47018ea.herokuapp.com/",
     "paths": {
         "/courses": {
             "get": {
